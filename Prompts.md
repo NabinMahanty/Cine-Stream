@@ -1,37 +1,33 @@
-# Prompts.md — AI Prompts Used in Movie Mood Matcher
+Important developer questions for the Cine-Stream / Movie Mood Matcher project
 
-## Mood Matcher Prompt (sent to APIFreeLLM)
-
-The following prompt is used inside `src/services/llm.js` to convert a user's mood description into a movie recommendation:
-
-```
-You are a movie recommendation expert. The user describes their current mood and what kind of movie they want to watch. Based on their description, recommend exactly ONE real movie title that best fits their mood.
-
-User's mood: "{user_input}"
-
-IMPORTANT: Respond with ONLY the movie title. No quotes, no explanation, no extra text. Just the movie title.
-```
-
-### Why this prompt design?
-
-1. **Role assignment** — "You are a movie recommendation expert" gives the model a clear persona.
-2. **Single output constraint** — "recommend exactly ONE real movie title" prevents lists and long responses.
-3. **Strict output format** — "Respond with ONLY the movie title" ensures the response can be directly used as a TMDB search query.
-4. **Temperature 0.7** — Provides creative variety across requests without being too random.
-5. **Max tokens 50** — Since we only need a movie title, this keeps responses short and costs low.
-
-### Example Interactions
-
-| User Mood Input                       | AI Response    | TMDB Result         |
-| ------------------------------------- | -------------- | ------------------- |
-| "I feel sad but want an action movie" | "John Wick"    | John Wick (2014)    |
-| "Something cozy for a rainy evening"  | "Amélie"       | Amélie (2001)       |
-| "I want to laugh with friends"        | "Superbad"     | Superbad (2007)     |
-| "Feeling nostalgic about the 90s"     | "Forrest Gump" | Forrest Gump (1994) |
-
-### Flow
-
-1. User types mood → sent to APIFreeLLM API
-2. APIFreeLLM returns a single movie title
-3. Title is silently searched on TMDB's `/search/movie` endpoint
-4. The top result is displayed to the user with poster, rating, and overview
+- **Project Goals**: What are the core user scenarios and success metrics for this app?
+- **TMDB Integration**: Which TMDB endpoints do we need and what rate limits apply?
+- **API Keys**: Where and how should the TMDB API key be stored and loaded securely?
+- **Local vs Remote Data**: Which data must persist locally (favorites) vs server-side?
+- **LLM Usage**: Is `src/services/llm.js` intended to call an external LLM or run locally? What prompts and safety checks are required?
+- **Privacy**: What user data is collected, stored, or sent to third parties?
+- **CORS & Proxying**: Do we need a backend proxy for TMDB or for API keys to avoid exposing secrets?
+- **Environment Management**: How will environment variables be managed across dev/staging/production?
+- **Error Handling**: What UX and logging should occur on network/API failures?
+- **Caching Strategy**: Should we cache TMDB responses (and for how long) to reduce API calls?
+- **Pagination & Search**: How will we handle paginated results and in-app search UX?
+- **Favorites Storage**: Which format and storage (localStorage, indexedDB, or backend) for `src/services/favorites.js`?
+- **Rate Limiting & Backoff**: How to handle TMDB rate limits and retries in `src/services/tmdb.js`?
+- **Testing**: What unit, integration, and E2E tests are required and which CI to use?
+- **Accessibility**: What A11y standards must UI components like `src/components/MovieCard.js` meet?
+- **Responsiveness**: Which screen sizes and breakpoints must the UI support?
+- **State Management**: Will app state be simple local state or require a store (e.g., Redux/Pinia)?
+- **Dependency Policy**: Which third-party libs are acceptable and how will we keep them updated/secure?
+- **Performance**: How to measure and optimize bundle size (Vite), initial load, and image handling?
+- **Image Loading**: How will we serve poster/backdrop images (TMDB size options, lazy-loading)?
+- **User Preferences**: Will we support user settings (theme, language, default filters)?
+- **Localization**: Is i18n required; which locales to support?
+- **Security**: Any XSS/CSRF concerns in the frontend; content sanitization?
+- **CI/CD & Deployment**: Where will the app be deployed and what build checks are required?
+- **Analytics & Monitoring**: What telemetry is needed for usage and errors?
+- **Licensing**: Are there licensing or TMDB attribution requirements to display?
+- **UX Flow**: How should mood input map to search/filter logic and be explained to users?
+- **Extensibility**: How easy should it be to add other data sources or recommendation models?
+- **Offline Behavior**: Should the app have offline fallback for viewing saved favorites?
+- **Contributing**: What contribution guidelines, code style, and pre-commit checks to enforce?
+- **Secrets Rotation**: What process will be used to rotate API keys and secrets?

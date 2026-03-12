@@ -20,7 +20,11 @@ export function debounce(fn, delay = 500) {
  * @param {number} duration - Duration in ms
  */
 export function showToast(message, duration = 2500) {
+  if (typeof window === "undefined") return;
+
   const toast = document.getElementById("toast");
+  if (!toast) return;
+
   toast.textContent = message;
   toast.classList.remove("hidden");
   toast.classList.add("show");

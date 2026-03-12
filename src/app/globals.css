@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+
 /* ===== RESET & BASE ===== */
 *,
 *::before,
@@ -214,91 +216,6 @@ img {
 .clear-btn:hover {
   color: var(--text-primary);
   background: rgba(255, 255, 255, 0.1);
-}
-
-/* ===== MOOD MATCHER ===== */
-.mood-matcher {
-  margin-top: 8px;
-}
-
-.mood-bar {
-  display: flex;
-  align-items: center;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: 4px 6px 4px 16px;
-  transition: var(--transition);
-}
-
-.mood-bar:focus-within {
-  border-color: #7c3aed;
-  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.25);
-}
-
-.mood-icon {
-  font-size: 1.3rem;
-  flex-shrink: 0;
-}
-
-.mood-input {
-  flex: 1;
-  background: none;
-  border: none;
-  outline: none;
-  padding: 12px;
-  font-size: 0.92rem;
-  color: var(--text-primary);
-  font-family: var(--font);
-}
-
-.mood-input::placeholder {
-  color: var(--text-muted);
-}
-
-.mood-btn {
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #7c3aed, #a855f7);
-  color: white;
-  font-weight: 600;
-  font-size: 0.85rem;
-  border-radius: 20px;
-  white-space: nowrap;
-  transition: var(--transition);
-}
-
-.mood-btn:hover {
-  transform: scale(1.03);
-  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
-}
-
-.mood-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.mood-result {
-  margin-top: 16px;
-  padding: 16px 20px;
-  background: linear-gradient(
-    135deg,
-    rgba(124, 58, 237, 0.1),
-    rgba(168, 85, 247, 0.05)
-  );
-  border: 1px solid rgba(124, 58, 237, 0.2);
-  border-radius: var(--radius-md);
-  color: var(--text-secondary);
-  font-size: 0.92rem;
-  text-align: left;
-  animation: fadeIn 0.4s ease;
-}
-
-.mood-result .mood-title {
-  color: #a855f7;
-  font-weight: 700;
-  font-size: 1rem;
-  margin-bottom: 4px;
 }
 
 /* ===== SECTION HEADER ===== */
@@ -624,6 +541,21 @@ img {
   width: 100%;
 }
 
+.infinite-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--text-muted);
+  padding: 20px 0;
+}
+
+.spinner-small {
+  width: 24px;
+  height: 24px;
+  border-width: 2px;
+}
+
 /* ===== TOAST ===== */
 .toast {
   position: fixed;
@@ -755,6 +687,33 @@ img {
   color: var(--text-primary);
 }
 
+/* ===== MOVIE DETAIL PAGE ===== */
+.detail-layout {
+  display: grid;
+  grid-template-columns: minmax(200px, 280px) 1fr;
+  gap: 36px;
+  align-items: start;
+  margin-bottom: 64px;
+}
+
+.detail-sidebar {
+  position: sticky;
+  top: 80px;
+}
+
+@media (max-width: 680px) {
+  .detail-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .detail-sidebar {
+    position: static;
+    max-width: 240px;
+    margin: 0 auto;
+  }
+}
+
 /* ===== FOOTER ===== */
 .footer {
   text-align: center;
@@ -802,28 +761,6 @@ img {
 
   .hero-title {
     font-size: 1.4rem;
-  }
-
-  .mood-bar {
-    flex-direction: column;
-    padding: 12px;
-    border-radius: var(--radius-md);
-    gap: 8px;
-  }
-
-  .mood-icon {
-    display: none;
-  }
-
-  .mood-input {
-    padding: 10px;
-    text-align: center;
-  }
-
-  .mood-btn {
-    width: 100%;
-    padding: 12px;
-    border-radius: var(--radius-sm);
   }
 
   .movie-grid {

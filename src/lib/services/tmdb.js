@@ -1,6 +1,6 @@
 // ===== Movie API Service (TMDB + OMDB compatibility) =====
 
-const API_KEY_RAW = (import.meta.env.VITE_TMDB_API_KEY || "").trim();
+const API_KEY_RAW = (process.env.NEXT_PUBLIC_TMDB_API_KEY || "").trim();
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 const OMDB_BASE_URL = "https://www.omdbapi.com/";
 const IMG_BASE = "https://image.tmdb.org/t/p";

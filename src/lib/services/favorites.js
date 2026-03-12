@@ -1,4 +1,5 @@
 // ===== Favorites Manager (LocalStorage) =====
+// Note: This is a client-side utility since localStorage only works in the browser
 
 const STORAGE_KEY = "moodmatch_favorites";
 
@@ -7,6 +8,8 @@ const STORAGE_KEY = "moodmatch_favorites";
  * @returns {Array} Array of movie objects
  */
 export function getFavorites() {
+  if (typeof window === "undefined") return [];
+
   try {
     return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
   } catch {
@@ -34,7 +37,9 @@ export function toggleFavorite(movie) {
 
   if (index > -1) {
     favs.splice(index, 1);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(favs));
+    if (typeof window !== "undefined") {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(favs));
+    }
     return false; // removed
   } else {
     // Store only necessary fields
@@ -47,7 +52,9 @@ export function toggleFavorite(movie) {
       overview: movie.overview,
       genre_ids: movie.genre_ids || [],
     });
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(favs));
+    if (typeof window !== "undefined") {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(favs));
+    }
     return true; // added
   }
 }
